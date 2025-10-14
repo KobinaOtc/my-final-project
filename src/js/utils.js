@@ -1,6 +1,7 @@
 export async function loadTemplate(path) {
     const res = await fetch(path);
     const template = await res.text();
+    console.log(template)
     return template;
 }
 

@@ -1,19 +1,23 @@
-import { renderWithTemplate } from './utils.js';
-import { renderHome, renderForms, renderAbout } from './views.js'
+import { loadTemplate, renderWithTemplate } from './utils.js';
+import { views } from './views.js'
 
 const routes = {
     '/': {
         title: 'Home',
-        render: renderHome,
+        templatePath: views.home,
     },
     '/forms': {
         title: 'Forms',
-        render: renderForms,
+        templatePath: views.forms,
     },
     '/about': {
         title: 'About',
-        render: renderAbout,
-    }
+        templatePath: views.about,
+    },
+    '/news': {
+        title: 'News',
+        templatePath: views.news,
+    },
 }
 
 async function handleRouting() {
@@ -25,7 +29,7 @@ async function handleRouting() {
     const mainElement = document.getElementById('app-root');
     mainElement.innerHTML = '';
     
-    const pageContent = await currentRoute.render();
+    const pageContent = await loadTemplate(currentRoute.templatePath);
 
     renderWithTemplate(pageContent, mainElement);
 }
