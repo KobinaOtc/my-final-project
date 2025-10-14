@@ -1,12 +1,18 @@
-// import {renderNews, renderForms} from './views.js'
+import { renderHome, renderForms, renderAbout } from './views.js'
 
 const routes = {
     '/': {
         title: 'Home',
+        render: renderHome,
     },
     '/forms': {
         title: 'Forms',
+        render: renderForms,
     },
+    '/about': {
+        title: 'About',
+        render: renderAbout,
+    }
 }
 
 function handleRouting() {
@@ -26,3 +32,5 @@ document.addEventListener('click', e => {
         handleRouting();
     }
 })
+
+handleRouting();
