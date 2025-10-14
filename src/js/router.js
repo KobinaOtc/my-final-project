@@ -1,3 +1,4 @@
+import { renderWithTemplate } from './utils.js';
 import { renderHome, renderForms, renderAbout } from './views.js'
 
 const routes = {
@@ -15,12 +16,18 @@ const routes = {
     }
 }
 
-function handleRouting() {
+async function handleRouting() {
     const path = window.location.pathname;
     const currentRoute = routes[path] || routes['/'];
 
-    document.getElementById('app-root').innerHTML = '';
-    currentRoute.render();
+    document.title = currentRoute.title;
+
+    const mainElement = document.getElementById('app-root');
+    mainElement.innerHTML = '';
+    
+    const pageContent = await currentRoute.render();
+
+    renderWithTemplate(pageContent, mainElement);
 }
 
 window.addEventListener('popstate', handleRouting);
