@@ -1,6 +1,6 @@
 export const views = {
-    home: '../views/home.html',
-    forms: '../views/forms.html',
-    about: '../views/about.html',
-    news: '../views/news.html'
+    home: '/src/views/home.html',
+    forms: '/src/views/forms.html',
+    about: '/src/views/about.html',
+    news: '/src/views/news.html'
 };
