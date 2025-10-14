@@ -3,8 +3,7 @@ import { loadHeaderFooter } from './utils.js'
 
 loadHeaderFooter();
 
-document.querySelector('#app-root').innerHTML = `
-  <div>
-  </div>
-`
-
+// document.querySelector('#app-root').innerHTML = `
+//   <div>
+//   </div>
+// `

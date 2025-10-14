@@ -11,3 +11,7 @@ export const renderForms = () => {
 export const renderAbout = () => {
     return loadTemplate('../views/about.html');
 }
+
+export const renderNews = () => {
+    return loadTemplate('../views/news.html')
+}
