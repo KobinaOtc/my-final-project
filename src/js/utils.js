@@ -1,7 +1,6 @@
 export async function loadTemplate(path) {
     const res = await fetch(path);
     const template = await res.text();
-    console.log(template)
     return template;
 }
 
@@ -13,8 +12,8 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 }
 
 export async function loadHeaderFooter() {
-    const headerTemplate = await loadTemplate('../../partials/header.html');
-    const footerTemplate = await loadTemplate('../../partials/footer.html');
+    const headerTemplate = await loadTemplate('/partials/header.html');
+    const footerTemplate = await loadTemplate('/partials/footer.html');
 
     const headerElement = document.querySelector('#dynamic-header');
     const footerElement = document.querySelector('#dynamic-footer');
