@@ -1,12 +1,17 @@
 import { loadTemplate, renderWithTemplate } from './utils.js';
 import { views } from './views.js'
 import { initializeForms } from './formHandler.js';
+import { renderNewsArticles, renderForexChart } from './renderAPIElements.js';
 
 const routes = {
     '/': {
         title: 'Home',
         templatePath: views.home,
-        callback: initializeForms
+        callback: () => {
+            renderNewsArticles();
+            renderForexChart();
+            initializeForms();
+        }
     },
     '/forms': {
         title: 'Forms',
@@ -21,7 +26,7 @@ const routes = {
     '/news': {
         title: 'News',
         templatePath: views.news,
-        callback: null
+        callback: renderNewsArticles
     },
 }
 
