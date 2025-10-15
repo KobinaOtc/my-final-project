@@ -1,22 +1,27 @@
 import { loadTemplate, renderWithTemplate } from './utils.js';
 import { views } from './views.js'
+import { initializeForms } from './formHandler.js';
 
 const routes = {
     '/': {
         title: 'Home',
         templatePath: views.home,
+        callback: initializeForms
     },
     '/forms': {
         title: 'Forms',
         templatePath: views.forms,
+        callback: initializeForms
     },
     '/about': {
         title: 'About',
         templatePath: views.about,
+        callback: null
     },
     '/news': {
         title: 'News',
         templatePath: views.news,
+        callback: null
     },
 }
 
@@ -27,11 +32,9 @@ async function handleRouting() {
     document.title = currentRoute.title;
 
     const mainElement = document.getElementById('app-root');
-    mainElement.innerHTML = '';
     
     const pageContent = await loadTemplate(currentRoute.templatePath);
-
-    renderWithTemplate(pageContent, mainElement);
+    renderWithTemplate(pageContent, mainElement, currentRoute.callback);
 }
 
 window.addEventListener('popstate', handleRouting);
