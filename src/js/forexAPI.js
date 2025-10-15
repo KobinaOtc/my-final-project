@@ -9,7 +9,8 @@ const API_BASE_URL = 'https://api.frankfurter.dev/'
 
 export async function fetchLatestRates(base = 'USD', symbols = []) {
     const symbolsString = symbols.length > 0 ? `&symbols=${symbols.join(',')}` : ''
-    const url = `${API_BASE_URL}/latest?base=${base}${symbolsString}`;
+    // The latest rates endpoint is '/latest' not '/v1/latest'
+    const url = `${API_BASE_URL}latest?base=${base}${symbolsString}`;
 
     try {
         const response = await fetch(url);
@@ -19,7 +20,7 @@ export async function fetchLatestRates(base = 'USD', symbols = []) {
         const data = await response.json();
         return data.rates;
     } catch (error) {
-        console.error('Could not fetch lates rates:', error);
+        console.error('Could not fetch latest rates:', error);
         return {};
     }
 }
@@ -32,7 +33,10 @@ export async function fetchLatestRates(base = 'USD', symbols = []) {
  * @returns {Promise<object>} - The historical exchange rates.
  */
 export async function fetchTimeSeries(base = 'USD', symbol = 'EUR', startDate = '2024-01-01') {
-    const url = `${API_BASE_URL}/${startDate}..?from=${base}&to=${symbol}`;
+    // Get the current date to use as the end date
+    const today = new Date().toISOString().split('T')[0];
+    // Correct the URL to use the 'v1' prefix and the proper date range format
+    const url = `${API_BASE_URL}v1/${startDate}..${today}?from=${base}&to=${symbol}`;
 
     try {
         const response = await fetch(url);
@@ -52,7 +56,8 @@ export async function fetchTimeSeries(base = 'USD', symbol = 'EUR', startDate = 
  * @returns {Promise<object>} - A dictionary of currency symbols and their full names.
  */
 export async function fetchSupportedCurrencies() {
-    const url = `${API_BASE_URL}/currencies`;
+    // Correct the URL to use the 'v1' prefix
+    const url = `${API_BASE_URL}v1/currencies`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
