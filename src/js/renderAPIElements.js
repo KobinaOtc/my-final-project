@@ -1,5 +1,6 @@
 import { fetchNews } from "./newsAPI";
 import { fetchTimeSeries } from "./forexAPI";
+import { Chart } from "chart.js";
 
 export async function renderNewsArticles() {
   const articlesContainer = document.querySelector('.articles-container');
@@ -27,10 +28,44 @@ export async function renderForexChart() {
 
   try {
     const historicalData = await fetchTimeSeries('USD', 'EUR', '2025-09-01');
-
+    
     const dates = Object.keys(historicalData);
     const rates = dates.map(date => historicalData[date].EUR);
+
+    new Chart(chartCanvas, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+          label: 'USD to EUR',
+          data: rates,
+          borderColor: '#FF5722',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x:{
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Rate'
+            }
+          }
+        }
+      }
+    });
+    chartContainer.querySelector('p').style.display = 'none';
   } catch (error) {
+    console.log(error)
     chartContainer.querySelector('p').textContent = 'Error loading chart data.';
   }
 }
