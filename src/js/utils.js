@@ -4,10 +4,10 @@ export async function loadTemplate(path) {
     return template;
 }
 
-export function renderWithTemplate(template, parentElement, data, callback) {
+export function renderWithTemplate(template, parentElement, callback) {
     parentElement.innerHTML = template;
     if (callback) {
-        callback(data);
+        callback();
     }
 }
 
