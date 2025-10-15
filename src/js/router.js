@@ -1,32 +1,29 @@
 import { loadTemplate, renderWithTemplate } from './utils.js';
 import { views } from './views.js'
 import { initializeForms } from './formHandler.js';
-import { renderNewsArticles, renderForexChart } from './renderAPIElements.js';
+import { initializeNewsPage, renderForexChart } from './renderAPIElements.js';
 
 const routes = {
     '/': {
         title: 'Home',
         templatePath: views.home,
         callback: () => {
-            renderNewsArticles();
+            initializeNewsPage();
             renderForexChart();
             initializeForms();
         }
     },
-    '/forms': {
-        title: 'Forms',
-        templatePath: views.forms,
-        callback: initializeForms
-    },
     '/about': {
         title: 'About',
         templatePath: views.about,
-        callback: null
+        callback: initializeNewsPage
     },
     '/news': {
         title: 'News',
         templatePath: views.news,
-        callback: renderNewsArticles
+        callback: () => {
+            initializeNewsPage();
+        }
     },
 }
 
