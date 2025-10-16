@@ -1,5 +1,5 @@
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const API_URL = `http://api.mediastack.com/v1/news?access_key=${API_KEY}&languages=en`
+const API_URL = `https://api.mediastack.com/v1/news?access_key=${API_KEY}&languages=en`
 
 export async function fetchNews() {
     try {
