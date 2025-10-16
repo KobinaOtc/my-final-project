@@ -24,7 +24,7 @@ Chart.register(
     Legend
 );
 
-const ARTICLES_PER_PAGE = 15;
+const ARTICLES_PER_PAGE = 8;
 let allNewsArticles = [];
 let currentPage = 0;
 
@@ -39,13 +39,13 @@ let currentPage = 0;
 
   const cardsHtml = articles.map(article => `
         <article class = "news-card">
-          ${article.urlToImage ? `<img src ="${article.urlToImage}" alt="${article.title}" class="news-image">` : ''}
+          ${article.image ? `<img src ="${article.image}" alt="${article.title}" class="news-image">` : ''}
           <div class="card-content">
             <h3><a href="${article.url}" target="_blank"> ${article.title}</a></h3>
             <p>${article.description || 'No description available.'}</p>
             <div class="card-meta">
-              <span class="source">${article.source.name.toUpperCase()}</span>
-              <span class="date">${new Date(article.publishedAt).toLocaleDateString()}</span>
+              <span class="source">${article.source.toUpperCase()}</span>
+              <span class="date">${new Date(article.published_at).toLocaleDateString()}</span>
             </div>
           </div>
         </article>
